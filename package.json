@@ -1,0 +1,15 @@
+{
+  "name": "yiwei-bistro-ops",
+  "version": "1.0.0",
+  "private": true,
+  "description": "餐厅前厅-后厨协同:催单时间线 / 退菜审批 / 重做责任 / 并发安全",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "reset": "node -e \"require('node:fs').rmSync('var',{recursive:true,force:true});console.log('已清空 var/(数据库与打印池)')\"",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  }
+}

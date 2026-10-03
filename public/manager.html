@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>经理审批 · 一味小馆</title>
+  <link rel="stylesheet" href="/assets/app.css">
+</head>
+<body>
+  <header class="topbar"></header>
+  <main class="page" style="grid-template-columns: 1.4fr 1fr; align-items:start">
+    <section class="panel">
+      <div class="panel-head">退款审批 <span class="hint">服务员只能发起,退款由此审批</span></div>
+      <div class="panel-body" id="refunds"></div>
+    </section>
+    <section class="panel">
+      <div class="panel-head">损耗与责任 <span class="hint">错上桌 / 过敏漏看等内部成本</span></div>
+      <div class="panel-body" id="losses"></div>
+    </section>
+  </main>
+  <script src="/assets/common.js"></script>
+  <script src="/assets/manager.js"></script>
+</body>
+</html>
