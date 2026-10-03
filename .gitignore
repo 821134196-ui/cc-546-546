@@ -13,3 +13,9 @@ build/
 轨迹/
 录屏/
 视频/
+
+# 本地运行产物
+*.db
+*.db-wal
+*.db-shm
+assets/dishes/*.svg

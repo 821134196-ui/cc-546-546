@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>值班经理 · 餐厅协同系统</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <h1>餐厅协同系统</h1>
+  <nav>
+    <a href="/floor" data-page="floor">前厅</a>
+    <a href="/kitchen" data-page="kitchen">后厨</a>
+    <a href="/manager" data-page="manager">值班经理</a>
+  </nav>
+  <span class="spacer"></span>
+  <span class="clock" id="clock"></span>
+  <select id="empSelect" title="当前操作身份（角色权限）"></select>
+</header>
+<main style="max-width:1000px">
+  <div class="section-title">待审批（退款 / 取消收费 / 重做）</div>
+  <div class="card" id="approvalList"></div>
+
+  <div class="section-title">费用调整台账 <span style="font-weight:400;font-size:12px;color:#55504a">
+    金额与原因紧邻；重做成本为内部核算，不向客人收取</span></div>
+  <table class="ledger">
+    <thead><tr>
+      <th>桌号</th><th>菜品</th><th>类型</th><th>原因</th><th>审批</th><th class="num">金额</th>
+    </tr></thead>
+    <tbody id="chargeLedger"></tbody>
+  </table>
+</main>
+<div class="toast" id="toast"></div>
+<script src="/app.js"></script>
+<script>boot("manager");</script>
+</body>
+</html>

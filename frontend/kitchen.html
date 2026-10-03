@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>后厨 · 餐厅协同系统</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <h1>餐厅协同系统</h1>
+  <nav>
+    <a href="/floor" data-page="floor">前厅</a>
+    <a href="/kitchen" data-page="kitchen">后厨</a>
+    <a href="/manager" data-page="manager">值班经理</a>
+  </nav>
+  <span class="spacer"></span>
+  <span class="clock" id="clock"></span>
+  <select id="empSelect" title="当前操作身份（角色权限）"></select>
+</header>
+<main>
+  <div id="kitchenBoard" class="kitchen-board"
+       style="grid-template-columns:repeat(auto-fill,minmax(330px,1fr));align-items:start"></div>
+</main>
+<div class="toast" id="toast"></div>
+<script src="/app.js"></script>
+<script>boot("kitchen");</script>
+</body>
+</html>

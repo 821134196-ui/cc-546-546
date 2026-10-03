@@ -1,0 +1,225 @@
+/* 白、墨黑、少量暖红 —— 忙碌时可扫读 */
+:root {
+  --paper: #ffffff;
+  --paper-2: #f7f5f1;
+  --ink: #1d1a17;
+  --ink-2: #55504a;
+  --line: #e5e0d8;
+  --warm-red: #c0392b;
+  --warm-red-soft: #fbeae7;
+  --warm-red-deep: #962d22;
+  --amber: #b9770e;
+  --green: #2e7d4f;
+  --radius: 12px;
+  --shadow: 0 1px 2px rgba(29,26,23,.06), 0 4px 14px rgba(29,26,23,.06);
+  font-size: 15px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  background: var(--paper-2);
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+/* ---------------- 顶栏 ---------------- */
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; gap: 18px;
+  padding: 10px 18px;
+  background: var(--ink); color: #fff;
+}
+.topbar h1 { font-size: 16px; margin: 0; font-weight: 700; letter-spacing: .5px; }
+.topbar nav { display: flex; gap: 4px; }
+.topbar nav a {
+  color: rgba(255,255,255,.72); text-decoration: none;
+  padding: 6px 12px; border-radius: 8px; font-size: 14px;
+}
+.topbar nav a:hover { background: rgba(255,255,255,.1); color: #fff; }
+.topbar nav a.active { background: var(--warm-red); color: #fff; }
+.topbar .spacer { flex: 1; }
+.topbar select {
+  background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.25);
+  border-radius: 8px; padding: 6px 8px; font-size: 14px;
+}
+.topbar select option { color: var(--ink); }
+.topbar .clock { font-variant-numeric: tabular-nums; font-size: 13px; opacity: .8; }
+
+main { padding: 16px 18px 60px; max-width: 1500px; margin: 0 auto; }
+
+/* ---------------- 通用卡片 ---------------- */
+.board { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 14px; align-items: start; }
+.kitchen-board { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+
+.card {
+  background: var(--paper); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.card-head {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 12px 14px 8px;
+}
+.card-head .table-no { font-size: 22px; font-weight: 800; letter-spacing: 1px; }
+.card-head .meta { color: var(--ink-2); font-size: 13px; }
+.card-head .spacer { flex: 1; }
+
+/* 等待时长 —— 前厅最醒目信息 */
+.wait {
+  font-size: 26px; font-weight: 800; font-variant-numeric: tabular-nums;
+  padding: 2px 10px; border-radius: 8px; line-height: 1.2;
+}
+.wait.ok    { color: var(--green); background: #eaf5ee; }
+.wait.warn  { color: var(--amber); background: #faf2e0; }
+.wait.hot   { color: #fff; background: var(--warm-red); }
+.wait.none  { font-size: 14px; color: var(--ink-2); background: var(--paper-2); }
+
+.card-body { padding: 4px 14px 12px; }
+.bill { font-size: 13px; color: var(--ink-2); }
+.bill b { color: var(--ink); font-size: 16px; }
+
+/* ---------------- 菜行 ---------------- */
+.dish {
+  display: flex; gap: 10px; align-items: center;
+  padding: 8px 0; border-top: 1px dashed var(--line);
+}
+.dish img { width: 52px; height: 34px; border-radius: 6px; object-fit: cover; border: 1px solid var(--line); background: var(--paper-2); }
+.dish .info { flex: 1; min-width: 0; }
+.dish .name { font-weight: 600; }
+.dish .sub { font-size: 12px; color: var(--ink-2); }
+.seat-tag {
+  display: inline-block; font-size: 11px; background: var(--paper-2);
+  border: 1px solid var(--line); border-radius: 20px; padding: 0 8px; margin-right: 6px;
+  color: var(--ink-2);
+}
+.badge {
+  display: inline-block; font-size: 11px; font-weight: 700;
+  padding: 1px 7px; border-radius: 20px;
+}
+.badge.queued   { background: #eef0f2; color: var(--ink-2); }
+.badge.prepping { background: #e7f0fa; color: #1f5d8c; }
+.badge.cooking  { background: #faf2e0; color: var(--amber); }
+.badge.served   { background: #eaf5ee; color: var(--green); }
+.badge.remaking { background: var(--warm-red-soft); color: var(--warm-red-deep); }
+.badge.wrong_delivered { background: var(--warm-red); color: #fff; }
+.badge.refunded { background: #f0ece7; color: var(--ink-2); text-decoration: line-through; }
+.badge.cancelled{ background: #f0ece7; color: var(--ink-2); }
+
+.allergen {
+  font-size: 11px; font-weight: 700; color: var(--warm-red-deep);
+  background: var(--warm-red-soft); border: 1px solid #f0cdc6;
+  border-radius: 4px; padding: 0 5px;
+}
+
+/* 重做标记 —— 后厨屏原单位置上最抢眼 */
+.remake-flag {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--warm-red); color: #fff;
+  font-weight: 800; font-size: 13px; letter-spacing: 1px;
+  padding: 6px 12px;
+}
+.remake-flag .seq {
+  background: #fff; color: var(--warm-red-deep); border-radius: 20px;
+  font-size: 11px; padding: 0 7px;
+}
+
+/* ---------------- 处理单 ---------------- */
+.ticket {
+  border: 1px solid var(--line); border-left: 4px solid var(--warm-red);
+  border-radius: 8px; margin: 8px 0; background: #fffdfb;
+}
+.ticket.urge { border-left-color: var(--amber); }
+.ticket.ack { border-left-color: var(--green); }
+.ticket-head {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  padding: 8px 10px; font-size: 13px;
+}
+.ticket-head .kind { font-weight: 800; }
+.ticket-head .reason { background: var(--warm-red-soft); color: var(--warm-red-deep);
+  border-radius: 4px; padding: 0 6px; font-weight: 700; }
+.ticket-head .liab { font-size: 12px; color: var(--ink-2); }
+.ticket-head .spacer { flex: 1; }
+.ticket-note { padding: 0 10px 6px; font-size: 13px; color: var(--ink-2); }
+.timeline { list-style: none; margin: 0; padding: 4px 10px 8px; font-size: 12px; }
+.timeline li { display: flex; gap: 8px; padding: 2px 0; color: var(--ink-2); }
+.timeline li .t { color: #9a938a; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.timeline li.again { color: var(--warm-red-deep); font-weight: 700; }
+.ticket-actions { display: flex; gap: 6px; flex-wrap: wrap; padding: 0 10px 10px; }
+
+/* ---------------- 按钮 ---------------- */
+button, .btn {
+  font: inherit; font-size: 13px; font-weight: 600;
+  border: 1px solid var(--ink); background: var(--ink); color: #fff;
+  border-radius: 8px; padding: 6px 12px; cursor: pointer;
+}
+button:hover { filter: brightness(1.15); }
+button:disabled { opacity: .45; cursor: not-allowed; }
+button.ghost { background: #fff; color: var(--ink); }
+button.danger { background: var(--warm-red); border-color: var(--warm-red); }
+button.tiny { padding: 3px 9px; font-size: 12px; border-radius: 6px; }
+select, input[type=text], input[type=number], textarea {
+  font: inherit; font-size: 13px; padding: 5px 8px;
+  border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink);
+}
+.reason-pick { display: flex; gap: 4px; flex-wrap: wrap; padding: 6px 10px 0; }
+.reason-pick button {
+  background: #fff; color: var(--ink-2); border: 1px solid var(--line);
+  font-size: 12px; padding: 3px 8px;
+}
+.reason-pick button.sel { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+/* ---------------- 后厨 ---------------- */
+.station-title {
+  font-size: 15px; font-weight: 800; padding: 4px 2px 8px;
+  display: flex; align-items: center; gap: 8px;
+}
+.station-title .count { font-size: 12px; color: var(--ink-2); font-weight: 400; }
+.kcard .dishrow { padding: 10px 12px; }
+.kcard .dishrow .name { font-size: 16px; font-weight: 700; }
+.kcard .origin { font-size: 12px; color: var(--ink-2); margin: 2px 0; }
+.kcard .waitline { display: flex; align-items: center; gap: 8px; margin: 6px 0 2px; }
+.kcard .stage-actions { display: flex; gap: 6px; margin-top: 8px; }
+.stage-btn { flex: 1; }
+.stage-btn.done { background: var(--green); border-color: var(--green); }
+.allergy-bar {
+  background: var(--warm-red-soft); color: var(--warm-red-deep);
+  font-size: 12px; font-weight: 700; padding: 4px 12px;
+  border-top: 1px dashed #f0cdc6;
+}
+
+/* ---------------- 经理 ---------------- */
+.approval { display: flex; gap: 12px; align-items: center; padding: 12px 14px;
+  border-top: 1px solid var(--line); flex-wrap: wrap; }
+.approval:first-child { border-top: none; }
+.approval .a-main { flex: 1; min-width: 220px; }
+.approval .a-title { font-weight: 700; }
+.approval .a-sub { font-size: 13px; color: var(--ink-2); }
+.approval .amount { font-size: 20px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.approval .amount.neg { color: var(--warm-red); }
+.tag-pending { background: #faf2e0; color: var(--amber); font-size: 11px; font-weight: 700;
+  padding: 1px 7px; border-radius: 20px; }
+
+.section-title { font-size: 15px; font-weight: 800; margin: 22px 2px 8px; }
+table.ledger { width: 100%; border-collapse: collapse; background: #fff;
+  border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow); font-size: 13px; }
+table.ledger th, table.ledger td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--line); }
+table.ledger th { background: var(--paper-2); font-size: 12px; color: var(--ink-2); }
+table.ledger td.num, table.ledger th.num { text-align: right; font-variant-numeric: tabular-nums; }
+td.neg { color: var(--warm-red); font-weight: 700; }
+tr.cost td { color: var(--ink-2); }
+
+.toast {
+  position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%);
+  background: var(--ink); color: #fff; padding: 10px 18px; border-radius: 10px;
+  font-size: 14px; box-shadow: var(--shadow); z-index: 100; opacity: 0;
+  transition: opacity .2s; pointer-events: none; max-width: 80vw;
+}
+.toast.show { opacity: 1; }
+.toast.err { background: var(--warm-red); }
+
+.empty { color: #9a938a; font-size: 13px; padding: 14px; text-align: center; }
+.flash-card { animation: flash 1.2s ease; }
+@keyframes flash { 0% { box-shadow: 0 0 0 3px var(--warm-red); } 100% { box-shadow: var(--shadow); } }
